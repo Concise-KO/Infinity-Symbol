@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
                     DrawInfinity(
                         modifier = Modifier.align(Alignment.Center),
                         thetaValues = generateSequenceInRange(0.0, 2 * PI, 0.001),
+                        enableAnimation = true
                     )
                 }
             }
