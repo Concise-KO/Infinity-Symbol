@@ -38,6 +38,10 @@ fun DrawInfinity(
 
     val thetaValuesAnimation = if (enableAnimation) thetaValues.map { it * animatedValue } else thetaValues
 
+    val coordinates = thetaValuesAnimation.map { theta ->
+        calculateCoordinates(theta = theta, scale = 300f)
+    }
+
     Canvas(
         modifier = modifier
             .fillMaxWidth()
@@ -48,19 +52,14 @@ fun DrawInfinity(
 
             var firstPoint = true
 
-            for (theta in thetaValuesAnimation) {
-
-                val (x, y) = calculateCoordinates(theta = theta, scale = 300f)
-
+            coordinates.forEach { (x, y) ->
                 val xMiddleOfCanvas = x + size.width / 2
                 val yMiddleOfCanvas = y + size.height / 2
 
                 if (firstPoint) {
                     moveTo(xMiddleOfCanvas, yMiddleOfCanvas)
                     firstPoint = false
-                } else {
-                    lineTo(xMiddleOfCanvas, yMiddleOfCanvas)
-                }
+                } else lineTo(xMiddleOfCanvas, yMiddleOfCanvas)
 
             }
         }
